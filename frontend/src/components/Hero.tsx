@@ -9,12 +9,6 @@ export function Hero() {
         </Link>
         <nav className="flex items-center gap-5 animate-fade-up">
           <a
-            href="#access"
-            className="hidden text-sm font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)] sm:inline"
-          >
-            Access
-          </a>
-          <a
             href="#workspace"
             className="hidden text-sm font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)] sm:inline"
           >
@@ -42,9 +36,6 @@ export function Hero() {
           <div className="animate-fade-up-d2 mt-5 flex flex-wrap items-center gap-2.5">
             <a href="#workspace" className="btn-primary !px-4 !py-2 text-sm">
               Open workspace
-            </a>
-            <a href="#access" className="btn-secondary !px-4 !py-2 text-sm">
-              Tester access
             </a>
           </div>
         </div>

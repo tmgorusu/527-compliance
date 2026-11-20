@@ -146,10 +146,11 @@ export function Workspace() {
           </h2>
           <p className="mt-2 text-[15px] leading-relaxed text-[var(--ink-soft)]">
             Export from your Google Sheet build as .xlsx or CSV, then upload one
-            organization at a time. At upload we remove exact $1.00 rows and
-            Schedule B / ledger expenses under $1.00. After XML download, sign in to
-            that client&apos;s IRS Political Organization account — we never store
-            portal logins.
+            organization at a time. No app login — IRS portal passwords stay with
+            you. At upload we remove exact $1.00 rows and Schedule B / ledger
+            expenses under $1.00 (sign off in Deleted records). Download XML +
+            recon, then upload the XML in that client&apos;s IRS Political
+            Organization account only.
           </p>
         </div>
 
@@ -160,7 +161,6 @@ export function Workspace() {
             </p>
             <p className="mt-1 text-sm text-[var(--ink-soft)]">
               Exact $1.00 on A/B/ledger; expenses strictly under $1.00 on B + ledger.
-              Sign-off via Deleted records log.
             </p>
           </div>
           <div className="surface px-4 py-3">
@@ -168,8 +168,8 @@ export function Workspace() {
               Per-client IRS login
             </p>
             <p className="mt-1 text-sm text-[var(--ink-soft)]">
-              One org per run. You upload the XML yourself in each client&apos;s
-              separate IRS portal — no credentials in this tool.
+              One org per run. You upload XML in each client&apos;s separate IRS
+              portal — credentials never stored here.
             </p>
           </div>
         </div>
