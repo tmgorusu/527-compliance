@@ -85,6 +85,8 @@ class RunResponse(BaseModel):
     findings: list[FindingOut] = Field(default_factory=list)
     reconciliation: str | None = None
     deleted_records: str | None = None
+    deleted_count: int = 0
+    deleted_total: str | None = None
     federal_xml_base64: str | None = None
     federal_xml_filename: str = "form_8872.xml"
     schedule_a_count: int | None = None
@@ -228,6 +230,12 @@ async def run(
             xml_b64 = base64.b64encode(result.federal_xml).decode("ascii")
 
         cover = result.bundle.cover if result.bundle else None
+        deleted_rows = result.bundle.deleted if result.bundle else []
+        deleted_total = None
+        if deleted_rows:
+            from decimal import Decimal
+
+            deleted_total = f"{sum((Decimal(d.amount) for d in deleted_rows), Decimal('0.00')):.2f}"
         return RunResponse(
             ok=result.ok,
             jurisdiction=result.jurisdiction,
@@ -235,6 +243,8 @@ async def run(
             findings=findings,
             reconciliation=result.reconciliation_text,
             deleted_records=deleted_text,
+            deleted_count=len(deleted_rows),
+            deleted_total=deleted_total,
             federal_xml_base64=xml_b64,
             schedule_a_count=len(result.bundle.schedule_a) if result.bundle else None,
             schedule_b_count=len(result.bundle.schedule_b) if result.bundle else None,

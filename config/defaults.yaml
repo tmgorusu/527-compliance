@@ -4,6 +4,13 @@
 DELETE_AMOUNTS:
   - "1.00"
 
+# Kyle: sub-$1 expense cleanup at upload (0 < abs(amount) < floor).
+# Exact $1.00 still handled by DELETE_AMOUNTS above.
+DELETE_STRICTLY_UNDER: "1.00"
+DELETE_STRICTLY_UNDER_SCHEDULES:
+  - "B"
+  - "LEDGER"
+
 # Ambiguity A2: proposed default follows IRS "at least" language.
 THRESHOLDS:
   schedule_a_itemize_ytd: "200.00"   # itemize when aggregate YTD >= this

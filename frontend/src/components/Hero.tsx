@@ -9,6 +9,12 @@ export function Hero() {
         </Link>
         <nav className="flex items-center gap-5 animate-fade-up">
           <a
+            href="#access"
+            className="hidden text-sm font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)] sm:inline"
+          >
+            Access
+          </a>
+          <a
             href="#workspace"
             className="hidden text-sm font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)] sm:inline"
           >
@@ -23,27 +29,24 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-start gap-8 px-6 pb-10 pt-6 md:grid-cols-[1.15fr_0.85fr] md:gap-10 md:px-8 md:pb-12 md:pt-8">
         <div>
           <p className="animate-fade-up mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">
-            Federal Form 8872 · Texas coming soon
+            Federal Form 8872 · one org per run
           </p>
           <h1 className="animate-fade-up-d1 max-w-lg text-[clamp(1.75rem,3.5vw,2.35rem)] font-bold leading-[1.12] tracking-[-0.03em] text-[var(--ink)]">
-            Financial infrastructure for 527 filings
+            Sheet or workbook in. IRS XML out.
           </h1>
           <p className="animate-fade-up-d2 mt-3 max-w-md text-[15px] leading-relaxed text-[var(--ink-soft)]">
-            Turn a client workbook or Schedule A/B CSV exports into filing-ready IRS XML.
-            Review findings, reconcile to the P&amp;L, then download — a human uploads to
-            the portal.
+            Built for the tedious part of 8872 reporting: clean sub-$1 expenses at
+            upload, build filing-ready XML, then you log into each client&apos;s IRS
+            portal separately. This app never asks for IRS passwords.
           </p>
           <div className="animate-fade-up-d2 mt-5 flex flex-wrap items-center gap-2.5">
             <a href="#workspace" className="btn-primary !px-4 !py-2 text-sm">
               Open workspace
             </a>
-            <a href="#workspace" className="btn-secondary !px-4 !py-2 text-sm">
-              Upload workbook
+            <a href="#access" className="btn-secondary !px-4 !py-2 text-sm">
+              Tester access
             </a>
           </div>
-          <p className="animate-fade-up-d2 mt-3 text-xs text-[var(--muted)]">
-            No portal passwords. Output files only.
-          </p>
         </div>
 
         <div className="animate-fade-up-d2 hidden sm:block">
@@ -51,10 +54,10 @@ export function Hero() {
             <div className="mb-3 flex items-center justify-between border-b border-[var(--line)] pb-3">
               <div>
                 <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-[var(--muted)]">
-                  Pipeline
+                  At upload
                 </p>
                 <p className="mt-0.5 text-sm font-semibold text-[var(--ink)]">
-                  Form 8872 build
+                  What this run does
                 </p>
               </div>
               <span className="border border-[var(--line)] px-2 py-0.5 text-[11px] font-semibold text-[var(--ok)]">
@@ -63,10 +66,10 @@ export function Hero() {
             </div>
             <ol className="space-y-0">
               {[
-                "Ingest & clean CSVs",
-                "$1 deletion + thresholds",
-                "Roll-ups & compliance",
-                "XSD-valid XML + recon",
+                "Ingest Excel / Google Sheet export / CSV",
+                "Sub-$1 + $1.00 cleanup (sign-off log)",
+                "Thresholds, roll-ups, P&L recon",
+                "XSD-valid XML — you upload to IRS",
               ].map((step, i) => (
                 <li
                   key={step}

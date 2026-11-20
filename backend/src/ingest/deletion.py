@@ -1,7 +1,10 @@
-"""Exact-match DELETE_AMOUNTS filtering — runs BEFORE clean/aggregate.
+"""DELETE_AMOUNTS + sub-$1 expense cleanup — runs BEFORE clean/aggregate.
 
-Amounts come only from config ``DELETE_AMOUNTS`` (never hardcoded).
-Applies to Schedule A, Schedule B, and raw ledger rows.
+- ``DELETE_AMOUNTS``: exact Decimal matches (never hardcoded in call sites).
+- ``DELETE_STRICTLY_UNDER``: optional floor; deletes when 0 < abs(amount) < floor
+  (Kyle: sub-$1 expense cleanup at upload). Scoped by
+  ``DELETE_STRICTLY_UNDER_SCHEDULES`` (default B + LEDGER).
+
 Always writes ``deleted_records.txt`` (or ``NO RECORDS DELETED``).
 """
 
@@ -60,6 +63,20 @@ def delete_amounts_from_config(config: dict[str, Any]) -> list[Decimal]:
     return amounts
 
 
+def delete_strictly_under_from_config(config: dict[str, Any]) -> Decimal | None:
+    raw = config.get("DELETE_STRICTLY_UNDER")
+    if raw is None or raw == "" or raw is False:
+        return None
+    return quantize_money(parse_money(str(raw)))
+
+
+def delete_under_schedules_from_config(config: dict[str, Any]) -> set[str]:
+    raw = config.get("DELETE_STRICTLY_UNDER_SCHEDULES")
+    if raw is None:
+        return {"B", "LEDGER"}
+    return {str(s).strip().upper() for s in raw}
+
+
 @dataclass
 class DeletionResult:
     schedule_a: list[dict[str, str]] = field(default_factory=list)
@@ -73,14 +90,26 @@ class DeletionResult:
 def _match_delete(
     amount_text: str,
     delete_amounts: Sequence[Decimal],
-) -> Decimal | None:
+    *,
+    schedule: str,
+    delete_under: Decimal | None,
+    under_schedules: set[str],
+) -> tuple[str, Decimal] | None:
+    """Return (reason_kind, matched_threshold) or None."""
     try:
         value = quantize_money(parse_money(amount_text))
     except (InvalidOperation, ValueError):
         return None
     for target in delete_amounts:
         if value == target:
-            return target
+            return ("exact", target)
+    if (
+        delete_under is not None
+        and schedule.upper() in under_schedules
+        and value != 0
+        and abs(value) < delete_under
+    ):
+        return ("under", delete_under)
     return None
 
 
@@ -92,6 +121,8 @@ def _apply_to_rows(
     name_keys: Sequence[str],
     date_keys: Sequence[str],
     delete_amounts: Sequence[Decimal],
+    delete_under: Decimal | None,
+    under_schedules: set[str],
 ) -> tuple[list[dict[str, str]], list[DeletedRecord]]:
     kept: list[dict[str, str]] = []
     deleted: list[DeletedRecord] = []
@@ -100,13 +131,27 @@ def _apply_to_rows(
         if amount_text == "":
             kept.append(row)
             continue
-        matched = _match_delete(amount_text, delete_amounts)
+        matched = _match_delete(
+            amount_text,
+            delete_amounts,
+            schedule=schedule,
+            delete_under=delete_under,
+            under_schedules=under_schedules,
+        )
         if matched is None:
             kept.append(row)
             continue
+        kind, threshold = matched
         money = quantize_money(parse_money(amount_text))
         money_str = f"{money:.2f}"
-        matched_str = f"{matched:.2f}"
+        threshold_str = f"{threshold:.2f}"
+        if kind == "exact":
+            reason = f"exact match DELETE_AMOUNTS={threshold_str}"
+        else:
+            reason = (
+                f"sub-$1 expense cleanup: 0 < abs(amount) < DELETE_STRICTLY_UNDER="
+                f"{threshold_str}"
+            )
         deleted.append(
             DeletedRecord(
                 schedule=schedule,  # type: ignore[arg-type]
@@ -115,8 +160,8 @@ def _apply_to_rows(
                 date=_first(row, date_keys) or None,
                 name=_first(row, name_keys) or None,
                 amount=money_str,
-                reason=f"exact match DELETE_AMOUNTS={matched_str}",
-                matched_delete_amount=matched_str,
+                reason=reason,
+                matched_delete_amount=threshold_str,
             )
         )
     return kept, deleted
@@ -131,10 +176,12 @@ def apply_delete_amounts(
     output_path: str | Path,
 ) -> DeletionResult:
     """
-    Filter exact DELETE_AMOUNTS matches from A/B/ledger; write deleted_records.txt;
+    Filter DELETE_AMOUNTS / sub-$1 matches from A/B/ledger; write deleted_records.txt;
     emit DeletedRecord list + WARN finding for human sign-off.
     """
     delete_amounts = delete_amounts_from_config(config)
+    delete_under = delete_strictly_under_from_config(config)
+    under_schedules = delete_under_schedules_from_config(config)
     result = DeletionResult()
 
     a_kept, a_del = _apply_to_rows(
@@ -144,6 +191,8 @@ def apply_delete_amounts(
         name_keys=SCHEDULE_A_NAME_KEYS,
         date_keys=SCHEDULE_A_DATE_KEYS,
         delete_amounts=delete_amounts,
+        delete_under=delete_under,
+        under_schedules=under_schedules,
     )
     b_kept, b_del = _apply_to_rows(
         schedule_b,
@@ -152,6 +201,8 @@ def apply_delete_amounts(
         name_keys=SCHEDULE_B_NAME_KEYS,
         date_keys=SCHEDULE_B_DATE_KEYS,
         delete_amounts=delete_amounts,
+        delete_under=delete_under,
+        under_schedules=under_schedules,
     )
     l_kept, l_del = _apply_to_rows(
         raw_ledger,
@@ -160,6 +211,8 @@ def apply_delete_amounts(
         name_keys=LEDGER_NAME_KEYS,
         date_keys=LEDGER_DATE_KEYS,
         delete_amounts=delete_amounts,
+        delete_under=delete_under,
+        under_schedules=under_schedules,
     )
 
     result.schedule_a = a_kept
@@ -177,6 +230,12 @@ def apply_delete_amounts(
         for d in result.deleted:
             by_sched[d.schedule] = by_sched.get(d.schedule, 0) + 1
             total += Decimal(d.amount)
+        under_note = ""
+        if delete_under is not None:
+            under_note = (
+                f"; also sub-$1 cleanup abs(amount)<{delete_under:.2f} on "
+                f"{sorted(under_schedules)}"
+            )
         result.findings.append(
             Finding(
                 id="DEL-001",
@@ -186,8 +245,9 @@ def apply_delete_amounts(
                 row=None,
                 field="amount",
                 message=(
-                    f"{len(result.deleted)} row(s) deleted for exact DELETE_AMOUNTS match "
-                    f"(total ${total:.2f}). Human sign-off required before filing."
+                    f"{len(result.deleted)} row(s) removed at upload "
+                    f"(total ${total:.2f}){under_note}. "
+                    "Human sign-off required before filing."
                 ),
                 source="client_style_guide",
                 context={
@@ -195,6 +255,10 @@ def apply_delete_amounts(
                     "total_dollars": f"{total:.2f}",
                     "per_schedule": by_sched,
                     "delete_amounts": [f"{a:.2f}" for a in delete_amounts],
+                    "delete_strictly_under": (
+                        f"{delete_under:.2f}" if delete_under is not None else None
+                    ),
+                    "delete_strictly_under_schedules": sorted(under_schedules),
                 },
             )
         )
@@ -207,9 +271,14 @@ def apply_delete_amounts(
                 sheet=None,
                 row=None,
                 field="amount",
-                message="No rows matched DELETE_AMOUNTS; deleted_records.txt written.",
+                message="No rows matched delete rules; deleted_records.txt written.",
                 source="client_style_guide",
-                context={"delete_amounts": [f"{a:.2f}" for a in delete_amounts]},
+                context={
+                    "delete_amounts": [f"{a:.2f}" for a in delete_amounts],
+                    "delete_strictly_under": (
+                        f"{delete_under:.2f}" if delete_under is not None else None
+                    ),
+                },
             )
         )
 

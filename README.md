@@ -25,6 +25,13 @@ cd frontend && npm install && npm run dev
 
 Production: [https://527-compliance.vercel.app](https://527-compliance.vercel.app)
 
+### Tester access (Kyle)
+
+- **Link:** https://527-compliance.vercel.app — no app login.
+- **Try first:** one client workbook (Google Sheet → File → Download → .xlsx, or Final-tab CSVs). Confirm Deleted records for sub-$1 / $1.00 cleanup, download XML, then upload in **that client’s** IRS Political Organization portal.
+- **Designed around:** (1) sub-$1 expense cleanup at upload plus exact $1.00, (2) separate IRS login per client — never stored here, (3) Sheet/Excel → 8872 XML.
+- Details: [TESTER.md](TESTER.md)
+
 Before deploy, sync vendored Python into `backend/`:
 
 ```bash

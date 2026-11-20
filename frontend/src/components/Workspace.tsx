@@ -22,6 +22,8 @@ type RunResponse = {
   findings: Finding[];
   reconciliation: string | null;
   deleted_records: string | null;
+  deleted_count?: number;
+  deleted_total?: string | null;
   federal_xml_base64: string | null;
   federal_xml_filename: string;
   schedule_a_count: number | null;
@@ -143,10 +145,33 @@ export function Workspace() {
             Drop workbook or Final-tab CSVs
           </h2>
           <p className="mt-2 text-[15px] leading-relaxed text-[var(--ink-soft)]">
-            Upload the client .xlsx (Cover / Schedule A Final / Schedule B Final / P&amp;L)
-            or the equivalent CSV exports. Never upload Filing Access or anything with
-            passwords.
+            Export from your Google Sheet build as .xlsx or CSV, then upload one
+            organization at a time. At upload we remove exact $1.00 rows and
+            Schedule B / ledger expenses under $1.00. After XML download, sign in to
+            that client&apos;s IRS Political Organization account — we never store
+            portal logins.
           </p>
+        </div>
+
+        <div className="mb-5 grid gap-3 sm:grid-cols-2">
+          <div className="surface px-4 py-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--muted)]">
+              Sub-$1 cleanup
+            </p>
+            <p className="mt-1 text-sm text-[var(--ink-soft)]">
+              Exact $1.00 on A/B/ledger; expenses strictly under $1.00 on B + ledger.
+              Sign-off via Deleted records log.
+            </p>
+          </div>
+          <div className="surface px-4 py-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--muted)]">
+              Per-client IRS login
+            </p>
+            <p className="mt-1 text-sm text-[var(--ink-soft)]">
+              One org per run. You upload the XML yourself in each client&apos;s
+              separate IRS portal — no credentials in this tool.
+            </p>
+          </div>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-5">
@@ -204,7 +229,8 @@ export function Workspace() {
             </label>
 
             <p className="mt-3 text-xs text-[var(--muted)]">
-              Optional: {OPTIONAL.join(", ")}
+              Optional: {OPTIONAL.join(", ")}. Reject uploads that include password /
+              login columns.
             </p>
 
             <button
@@ -234,8 +260,9 @@ export function Workspace() {
                   Results appear here
                 </p>
                 <p className="mt-2 max-w-sm text-sm leading-relaxed text-[var(--ink-soft)]">
-                  After a successful federal run you can download Form 8872 XML, the
-                  reconciliation report, deleted-records log, and findings.
+                  After a successful federal run: download Form 8872 XML, check the
+                  deleted-records cleanup log, then upload XML in that client&apos;s
+                  IRS account.
                 </p>
               </div>
             )}
@@ -244,7 +271,7 @@ export function Workspace() {
               <div className="flex flex-1 flex-col justify-center gap-2">
                 <div className="h-px w-full bg-[var(--line-strong)]" />
                 <p className="text-sm font-medium text-[var(--ink-soft)]">
-                  Ingest → delete → clean → roll-up → compliance → XML → reconcile…
+                  Ingest → sub-$1 cleanup → clean → roll-up → compliance → XML → reconcile…
                 </p>
               </div>
             )}
@@ -275,6 +302,23 @@ export function Workspace() {
                     style={{ fontFamily: "var(--mono)" }}
                   >
                     A {result.schedule_a_count ?? "—"} · B {result.schedule_b_count ?? "—"}
+                  </p>
+                </div>
+
+                <div className="border border-[var(--line)] bg-[var(--bg-muted)] px-3 py-2.5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+                    Upload cleanup
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--ink)]">
+                    {(result.deleted_count ?? 0) === 0
+                      ? "No $1.00 / sub-$1 rows removed this run."
+                      : `${result.deleted_count} row(s) removed at upload${
+                          result.deleted_total ? ` ($${result.deleted_total})` : ""
+                        }. Review Deleted records before filing.`}
+                  </p>
+                  <p className="mt-1 text-xs text-[var(--muted)]">
+                    Next: download XML → log into this organization&apos;s IRS portal →
+                    upload there.
                   </p>
                 </div>
 
@@ -387,8 +431,8 @@ export function Workspace() {
         </div>
 
         <footer className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-[var(--line)] pt-6 text-xs text-[var(--muted)]">
-          <span>Tool does not decide filing obligation</span>
-          <span>Human uploads to IRS portal</span>
+          <span>Sub-$1 + $1.00 cleanup at upload</span>
+          <span>Human uploads XML — separate IRS login per client</span>
           <span>Texas blocked until TEC spec</span>
         </footer>
       </div>
