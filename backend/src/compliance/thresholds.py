@@ -48,25 +48,35 @@ def _strip_schedule_a_rollups(
     rollup_names: set[str],
     quantize: Decimal,
     rounding: str,
-) -> tuple[list[ScheduleARecord], Decimal, list[int]]:
+) -> tuple[list[ScheduleARecord], Decimal, Decimal, Address | None, list[int]]:
     """Remove existing roll-up lines so rebuilt totals are not double-counted.
 
-    Returns ``(detail_rows, seed_amount, seed_source_rows)``. Final-tab exports
-    often include only the aggregate roll-up line (no underlying below-threshold
-    detail). The seed amount is re-emitted when no demoted detail rows exist.
-    When demoted detail *is* present, the seed is discarded so totals are not
-    double-counted.
+    Returns
+    ``(detail_rows, seed_amount, seed_ytd, seed_address, seed_source_rows)``.
+
+    Final-tab exports often include only the aggregate roll-up line (no
+    underlying below-threshold detail). Preserve that line's period amount,
+    calendar-year YTD (``aggregate_ytd``), and address (e.g. ``STE 300``) so
+    the rebuilt AGGREGATE BELOW THRESHOLD row matches the filed Final sheet.
     """
     out: list[ScheduleARecord] = []
     seed = Decimal("0.00")
+    seed_ytd = Decimal("0.00")
+    seed_address: Address | None = None
     seed_rows: list[int] = []
     for r in rows:
         if r.is_rollup or _name_key(r.name) in rollup_names:
             seed = to_money(seed + to_money(r.amount, quantize, rounding), quantize, rounding)
+            # Prefer the largest YTD seen on seed roll-up lines (normally one).
+            ytd = to_money(r.aggregate_ytd, quantize, rounding)
+            if ytd > seed_ytd:
+                seed_ytd = ytd
+            if seed_address is None:
+                seed_address = r.address
             seed_rows.append(r.source_row)
             continue
         out.append(r)
-    return out, seed, seed_rows
+    return out, seed, seed_ytd, seed_address, seed_rows
 
 
 def _strip_schedule_b_rollups(
@@ -241,7 +251,7 @@ def apply_thresholds_and_rollups(
     period_end = bundle.cover.period_end
 
     # --- Schedule A ---
-    raw_a, seed_a, seed_rows_a = _strip_schedule_a_rollups(
+    raw_a, seed_a, seed_ytd_a, seed_address_a, seed_rows_a = _strip_schedule_a_rollups(
         list(bundle.schedule_a), rollup_name_keys, quantize, rounding
     )
     deleted_a = _deleted_by_name(bundle.deleted, "A")
@@ -302,11 +312,18 @@ def apply_thresholds_and_rollups(
     schedule_a: list[ScheduleARecord] = list(itemized_a) + list(deletion_markers_a)
 
     # Seed (stripped Final roll-up) + demoted itemized rows (disjoint sets for
-    # Final exports). Period amount on the roll-up line; YTD = seed YTD proxy
-    # plus demoted persons' recomputed YTDs.
+    # Final exports). Period amount on the roll-up line; YTD comes from the
+    # Final seed's Aggregate Contributions YTD (not the period amount).
     demoted_amt_a = sum_money([r.amount for r in rollup_components_a], quantize, rounding)
     amt = to_money(seed_a + demoted_amt_a, quantize, rounding)
-    ytd_roll = to_money(seed_a + sum_money(rollup_ytd_parts, quantize, rounding), quantize, rounding)
+    demoted_ytd = sum_money(rollup_ytd_parts, quantize, rounding)
+    if seed_ytd_a > 0:
+        ytd_roll = to_money(seed_ytd_a + demoted_ytd, quantize, rounding)
+    else:
+        # No Final seed YTD — fall back to period seed amount + demoted YTDs.
+        ytd_roll = to_money(seed_a + demoted_ytd, quantize, rounding)
+    # Prefer Final aggregate-row address (STE 300) over cover business (SUITE 300).
+    rollup_address_a = seed_address_a or business
     src_rows = sorted(set(seed_rows_a) | {r.source_row for r in rollup_components_a})
     component_count = len(rollup_components_a)
 
@@ -321,7 +338,7 @@ def apply_thresholds_and_rollups(
                 amount=money_str(amt, quantize, rounding),
                 component_count=component_count,
                 component_source_rows=src_rows,
-                address=business,
+                address=rollup_address_a,
                 date=period_end,
                 employer="N/A",
                 occupation="N/A",
@@ -331,7 +348,7 @@ def apply_thresholds_and_rollups(
         schedule_a.append(
             ScheduleARecord(
                 name=name_a,
-                address=business,
+                address=rollup_address_a,
                 employer="N/A",
                 occupation="N/A",
                 date=period_end,
