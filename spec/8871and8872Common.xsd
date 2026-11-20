@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://forms.irs.gov/pofd/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://forms.irs.gov/pofd/schema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS 887x Schema - Base types commonly used across schema files</Description>
+			<Version>Version 2.3</Version>
+			<ReleaseDate>October 7, 2005</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- attributes -->
+	<xsd:attributeGroup name="pacInfo">
+		<xsd:attribute name="pacId" type="xsd:positiveInteger" use="optional"/>
+		<xsd:attribute name="ein" type="xsd:positiveInteger" use="optional"/>
+	</xsd:attributeGroup>
+	<!-- String Type -->
+	<xsd:simpleType name="StringType">
+		<xsd:annotation>
+			<xsd:documentation>Base type for a string.  Does not allow pipe, greater than and less than characters and leading white space. Updated (9/2009) to not allow characters > 127 (i.e. non-ascii) by only allowing whitespace and printable ascii: exclaimation (33) through tilde (126).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[^\s][^\|&lt;&gt;][\s!&#34;#&#36;%&amp;'\(\)\*\+,\-\./:;=\?@\[\\\]\^_`\{\}~a-zA-Z0-9]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Date Type -->
+	<xsd:simpleType name="DateType">
+		<xsd:annotation>
+			<xsd:documentation>Dates must be represented as a Gregorian calendar date with CCYY-MM-DD lexical representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	<!-- Month Type -->
+	<xsd:simpleType name="MonthType">
+		<xsd:annotation>
+			<xsd:documentation>A two digit month type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:date">
+			<xsd:pattern value="[0-1][0-9]"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Year Type in the format of YYYY-->
+	<xsd:simpleType name="YearType">
+		<xsd:annotation>
+			<xsd:documentation>Base type for a 4-digit year</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:gYear"/>
+	</xsd:simpleType>
+	<!-- Boolean Type - true or false, or 1 or 0 -->
+	<xsd:simpleType name="BooleanType">
+		<xsd:annotation>
+			<xsd:documentation>Base type for a boolean. Typically used on an Yes or No field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<!-- Checkbox Type String -->
+	<xsd:simpleType name="CheckboxTypeString">
+		<xsd:annotation>
+			<xsd:documentation>Typically used by an optional checkbox.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+			<xsd:pattern value="0|1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Checkbox Type String -->
+	<xsd:simpleType name="CheckboxTypeYes">
+		<xsd:annotation>
+			<xsd:documentation>Typically used by an optional checkbox.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+			<xsd:pattern value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- U.S. Amount Type -->
+	<xsd:simpleType name="USAmountType">
+		<xsd:annotation>
+			<xsd:documentation>Type for a U.S. integer amount field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="19"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- EAIN Type -->
+	<xsd:simpleType name="EAINType">
+		<xsd:annotation>
+			<xsd:documentation>Type for Election Authority Identification No. - 30 Characters.  Same limitations as the StringType. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="StringType"/> 
+	</xsd:simpleType>
+	<!-- Street Address Type -->
+	<xsd:simpleType name="StreetAddressType">
+		<xsd:annotation>
+			<xsd:documentation>Used for street address.  Invalid characters are: _ @ $ ^ &amp; ( ) + = | \ [ ] { } * &gt; &lt; " ' : ~ ; ? ! and leading space.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="35"/>
+			<xsd:pattern value="[^\s_@$\^&amp;\(\)\+=\|\\\[\]\{\}\*&gt;&lt;&apos;&quot;:;\?!][A-Za-z0-9\.\-#%/,\s]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Street Address, optional second line Type -->
+	<xsd:simpleType name="StreetAddressLineTwoType">
+		<xsd:annotation>
+			<xsd:documentation>Used for street address.  Invalid characters are: _ @ $ ^ &amp; ( ) + = | \ [ ] { } * &gt; &lt; " ' : ~ ; ? ! and leading space.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="35"/>
+			<xsd:pattern value="[^\s_@$\^&amp;\(\)\+=\|\\\[\]\{\}\*&gt;&lt;&apos;&quot;:;\?!][A-Za-z0-9\.\-#%/,\s]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- City Type -->
+	<xsd:simpleType name="CityType">
+		<xsd:annotation>
+			<xsd:documentation>Used for a city.  Invalid characters are: _ @ $ ^ &amp; ( ) + = | \ [ ] { } * &gt; &lt; " ' : ~ ; ? ! and leading space.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="22"/>
+			<xsd:pattern value="[^\s_@$\^&amp;\(\)\+=\|\\\[\]\{\}\*&gt;&lt;&apos;&quot;:;\?!][A-Za-z0-9\.\-#%/,\s]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- U.S. State Abbreviations Type -->
+	<xsd:simpleType name="StateType">
+		<xsd:annotation>
+			<xsd:documentation>State abbreviations, a.k.a. state codes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AL">
+				<xsd:annotation>
+					<xsd:documentation>Alabama</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AK">
+				<xsd:annotation>
+					<xsd:documentation>Alaska</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AS">
+				<xsd:annotation>
+					<xsd:documentation>American Samoa</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AZ">
+				<xsd:annotation>
+					<xsd:documentation>Arizona</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AR">
+				<xsd:annotation>
+					<xsd:documentation>Arkansas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CA">
+				<xsd:annotation>
+					<xsd:documentation>California</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CO">
+				<xsd:annotation>
+					<xsd:documentation>Colorado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CT">
+				<xsd:annotation>
+					<xsd:documentation>Connecticut</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DE">
+				<xsd:annotation>
+					<xsd:documentation>Delaware</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DC">
+				<xsd:annotation>
+					<xsd:documentation>District of Columbia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FM">
+				<xsd:annotation>
+					<xsd:documentation>Federated States of Micronesia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FL">
+				<xsd:annotation>
+					<xsd:documentation>Florida</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GA">
+				<xsd:annotation>
+					<xsd:documentation>Georgia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GU">
+				<xsd:annotation>
+					<xsd:documentation>Guam</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HI">
+				<xsd:annotation>
+					<xsd:documentation>Hawaii</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ID">
+				<xsd:annotation>
+					<xsd:documentation>Idaho</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IL">
+				<xsd:annotation>
+					<xsd:documentation>Illinois</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IN">
+				<xsd:annotation>
+					<xsd:documentation>Indiana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IA">
+				<xsd:annotation>
+					<xsd:documentation>Iowa</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KS">
+				<xsd:annotation>
+					<xsd:documentation>Kansas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KY">
+				<xsd:annotation>
+					<xsd:documentation>Kentucky</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LA">
+				<xsd:annotation>
+					<xsd:documentation>Louisiana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ME">
+				<xsd:annotation>
+					<xsd:documentation>Maine</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MH">
+				<xsd:annotation>
+					<xsd:documentation>Marshall Islands</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MD">
+				<xsd:annotation>
+					<xsd:documentation>Maryland</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MA">
+				<xsd:annotation>
+					<xsd:documentation>Massachusetts</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MI">
+				<xsd:annotation>
+					<xsd:documentation>Michigan</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MN">
+				<xsd:annotation>
+					<xsd:documentation>Minnesota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MS">
+				<xsd:annotation>
+					<xsd:documentation>Mississippi</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MO">
+				<xsd:annotation>
+					<xsd:documentation>Missouri</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MT">
+				<xsd:annotation>
+					<xsd:documentation>Montana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NE">
+				<xsd:annotation>
+					<xsd:documentation>Nebraska</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NV">
+				<xsd:annotation>
+					<xsd:documentation>Nevada</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NH">
+				<xsd:annotation>
+					<xsd:documentation>New Hampshire</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NJ">
+				<xsd:annotation>
+					<xsd:documentation>New Jersey</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NM">
+				<xsd:annotation>
+					<xsd:documentation>New Mexico</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NY">
+				<xsd:annotation>
+					<xsd:documentation>New York</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NC">
+				<xsd:annotation>
+					<xsd:documentation>North Carolina</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ND">
+				<xsd:annotation>
+					<xsd:documentation>North Dakota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MP">
+				<xsd:annotation>
+					<xsd:documentation>North Mariana Islands</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OH">
+				<xsd:annotation>
+					<xsd:documentation>Ohio</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OK">
+				<xsd:annotation>
+					<xsd:documentation>Oklahoma</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OR">
+				<xsd:annotation>
+					<xsd:documentation>Oregon</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PW">
+				<xsd:annotation>
+					<xsd:documentation>Palau</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PA">
+				<xsd:annotation>
+					<xsd:documentation>Pennsylvania</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PR">
+				<xsd:annotation>
+					<xsd:documentation>Puerto Rico</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RI">
+				<xsd:annotation>
+					<xsd:documentation>Rhode Island</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SC">
+				<xsd:annotation>
+					<xsd:documentation>South Carolina</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SD">
+				<xsd:annotation>
+					<xsd:documentation>South Dakota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TN">
+				<xsd:annotation>
+					<xsd:documentation>Tennessee</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TX">
+				<xsd:annotation>
+					<xsd:documentation>Texas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UT">
+				<xsd:annotation>
+					<xsd:documentation>Utah</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VT">
+				<xsd:annotation>
+					<xsd:documentation>Vermont</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VI">
+				<xsd:annotation>
+					<xsd:documentation>Virgin Islands</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VA">
+				<xsd:annotation>
+					<xsd:documentation>Virginia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WA">
+				<xsd:annotation>
+					<xsd:documentation>Washington</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WV">
+				<xsd:annotation>
+					<xsd:documentation>West Virginia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WI">
+				<xsd:annotation>
+					<xsd:documentation>Wisconsin</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WY">
+				<xsd:annotation>
+					<xsd:documentation>Wyoming</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AA">
+				<xsd:annotation>
+					<xsd:documentation>Armed Forces the Americas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AE">
+				<xsd:annotation>
+					<xsd:documentation>Armed Forces Europe</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AP">
+				<xsd:annotation>
+					<xsd:documentation>Armed Forces Pacific</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- U.S. ZIP Code 5 Digits -->
+	<xsd:simpleType name="ZIP5">
+		<xsd:annotation>
+			<xsd:documentation>ZIP Code - 5 digits</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{5}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- U.S. ZIP Code Type -->
+	<xsd:simpleType name="ZIP4">
+		<xsd:annotation>
+			<xsd:documentation>ZIP Code - 4 digits</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{4}|[0-9]{0}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Email Address Type -->
+	<xsd:simpleType name="EmailAddressType">
+		<xsd:annotation>
+			<xsd:documentation>Used for an email address. The User ID portion of the email address allows: A-Z, a-z, 0-9, underscore, hyphen and period</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="150"/>
+			<xsd:minLength value="7"/>
+			<xsd:pattern value="no@email"/>
+			<xsd:pattern value="[A-Za-z0-9_\-\.]+&#x40;(([0-9]|[1-9][0-9]|[2][0-4][0-9]|[2][5][0-5])\.){3}([0-9]|[1-9][0-9]|[2][0-4][0-9]|[2][5][0-5])">
+				<xsd:annotation>
+					<xsd:documentation>IPv4 Email Address.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:pattern>
+			<xsd:pattern value="[A-Za-z0-9_\-\.]+&#x40;([A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}">
+				<xsd:annotation>
+					<xsd:documentation>IPv6 Email Address</xsd:documentation>
+				</xsd:annotation>
+			</xsd:pattern>
+			<xsd:pattern value="[A-Za-z0-9_\-\.]+&#x40;([A-Za-z0-9\-]+[A-Za-z0-9]\.)+[A-Za-z]([A-Za-z0-9\-])+[A-Za-z0-9]">
+				<xsd:annotation>
+					<xsd:documentation>Domain Name Email Address</xsd:documentation>
+				</xsd:annotation>
+			</xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Election Type -->
+	<xsd:simpleType name="ElectionType">
+		<xsd:annotation>
+			<xsd:documentation>"primary", "general", "convention", "special", or "run-off"</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="primary"/>
+			<xsd:enumeration value="convention"/>
+			<xsd:enumeration value="general"/>
+			<xsd:enumeration value="special"/>
+			<xsd:enumeration value="run-off"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Type for a U.S. Address -->
+	<xsd:complexType name="USAddressType">
+		<xsd:sequence>
+			<xsd:element name="AddressLine1">
+				<xsd:annotation>
+					<xsd:documentation>Address line 1</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StreetAddressType">
+						<xsd:maxLength value="35"/>
+						<xsd:minLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AddressLine2" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Address line 2</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StreetAddressLineTwoType">
+						<xsd:maxLength value="35"/>
+						<xsd:minLength value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="City">
+				<xsd:annotation>
+					<xsd:documentation>City</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="CityType">
+						<xsd:maxLength value="22"/>
+						<xsd:minLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="State">
+				<xsd:annotation>
+					<xsd:documentation>State</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StateType">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ZIP5">
+				<xsd:simpleType>
+					<xsd:restriction base="ZIP5">
+						<xsd:length value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ZIP4" nillable="true" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ZIP code</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="ZIP4"/>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- U.S. State Abbreviations Type -->
+	<xsd:simpleType name="EAINStateType">
+		<xsd:annotation>
+			<xsd:documentation>State abbreviations, a.k.a. state codes to be used for EAIN</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AL">
+				<xsd:annotation>
+					<xsd:documentation>Alabama</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AK">
+				<xsd:annotation>
+					<xsd:documentation>Alaska</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AZ">
+				<xsd:annotation>
+					<xsd:documentation>Arizona</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AR">
+				<xsd:annotation>
+					<xsd:documentation>Arkansas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CA">
+				<xsd:annotation>
+					<xsd:documentation>California</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CO">
+				<xsd:annotation>
+					<xsd:documentation>Colorado</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CT">
+				<xsd:annotation>
+					<xsd:documentation>Connecticut</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DE">
+				<xsd:annotation>
+					<xsd:documentation>Delaware</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DC">
+				<xsd:annotation>
+					<xsd:documentation>District of Columbia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FL">
+				<xsd:annotation>
+					<xsd:documentation>Florida</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="GA">
+				<xsd:annotation>
+					<xsd:documentation>Georgia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="HI">
+				<xsd:annotation>
+					<xsd:documentation>Hawaii</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ID">
+				<xsd:annotation>
+					<xsd:documentation>Idaho</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IL">
+				<xsd:annotation>
+					<xsd:documentation>Illinois</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IN">
+				<xsd:annotation>
+					<xsd:documentation>Indiana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IA">
+				<xsd:annotation>
+					<xsd:documentation>Iowa</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KS">
+				<xsd:annotation>
+					<xsd:documentation>Kansas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="KY">
+				<xsd:annotation>
+					<xsd:documentation>Kentucky</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LA">
+				<xsd:annotation>
+					<xsd:documentation>Louisiana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ME">
+				<xsd:annotation>
+					<xsd:documentation>Maine</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MD">
+				<xsd:annotation>
+					<xsd:documentation>Maryland</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MA">
+				<xsd:annotation>
+					<xsd:documentation>Massachusetts</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MI">
+				<xsd:annotation>
+					<xsd:documentation>Michigan</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MN">
+				<xsd:annotation>
+					<xsd:documentation>Minnesota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MS">
+				<xsd:annotation>
+					<xsd:documentation>Mississippi</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MO">
+				<xsd:annotation>
+					<xsd:documentation>Missouri</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MT">
+				<xsd:annotation>
+					<xsd:documentation>Montana</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NE">
+				<xsd:annotation>
+					<xsd:documentation>Nebraska</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NV">
+				<xsd:annotation>
+					<xsd:documentation>Nevada</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NH">
+				<xsd:annotation>
+					<xsd:documentation>New Hampshire</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NJ">
+				<xsd:annotation>
+					<xsd:documentation>New Jersey</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NM">
+				<xsd:annotation>
+					<xsd:documentation>New Mexico</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NY">
+				<xsd:annotation>
+					<xsd:documentation>New York</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NC">
+				<xsd:annotation>
+					<xsd:documentation>North Carolina</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ND">
+				<xsd:annotation>
+					<xsd:documentation>North Dakota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OH">
+				<xsd:annotation>
+					<xsd:documentation>Ohio</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OK">
+				<xsd:annotation>
+					<xsd:documentation>Oklahoma</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OR">
+				<xsd:annotation>
+					<xsd:documentation>Oregon</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PA">
+				<xsd:annotation>
+					<xsd:documentation>Pennsylvania</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="RI">
+				<xsd:annotation>
+					<xsd:documentation>Rhode Island</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SC">
+				<xsd:annotation>
+					<xsd:documentation>South Carolina</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SD">
+				<xsd:annotation>
+					<xsd:documentation>South Dakota</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TN">
+				<xsd:annotation>
+					<xsd:documentation>Tennessee</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TX">
+				<xsd:annotation>
+					<xsd:documentation>Texas</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="UT">
+				<xsd:annotation>
+					<xsd:documentation>Utah</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VT">
+				<xsd:annotation>
+					<xsd:documentation>Vermont</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="VA">
+				<xsd:annotation>
+					<xsd:documentation>Virginia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WA">
+				<xsd:annotation>
+					<xsd:documentation>Washington</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WV">
+				<xsd:annotation>
+					<xsd:documentation>West Virginia</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WI">
+				<xsd:annotation>
+					<xsd:documentation>Wisconsin</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WY">
+				<xsd:annotation>
+					<xsd:documentation>Wyoming</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FD">
+				<xsd:annotation>
+					<xsd:documentation>Federal</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

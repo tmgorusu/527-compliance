@@ -1,0 +1,4 @@
+Recipient Name,Address Line 1,Address Line 2,City,State,ZIP 5,ZIP 4,Recipient Employer,Recipient Occupation,Expenditure Date,Expenditure Amount,Expenditure Purpose,is_unapplied_cash
+NORMAL VENDOR,100 VENDOR RD,,RICHMOND,VA (Virginia),23233,,N/A,N/A,2026-07-14,50.00,ADMIN-BANK CHARGES AND FEES,false
+UNAPPLIED CASH ZERO,200 VENDOR RD,,RICHMOND,VA (Virginia),23233,,N/A,N/A,2026-08-01,0.00,UNAPPLIED CASH BILL PAYMENT,true
+UNAPPLIED CASH NONZERO,300 VENDOR RD,,RICHMOND,VA (Virginia),23233,,N/A,N/A,2026-08-15,25.00,UNAPPLIED CASH BILL PAYMENT,true

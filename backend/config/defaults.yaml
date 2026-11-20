@@ -1,0 +1,46 @@
+# Pipeline defaults — never hardcode these values inside deletion/threshold logic.
+# Override via CLI or a local config file.
+
+DELETE_AMOUNTS:
+  - "1.00"
+
+# Ambiguity A2: proposed default follows IRS "at least" language.
+THRESHOLDS:
+  schedule_a_itemize_ytd: "200.00"   # itemize when aggregate YTD >= this
+  schedule_b_itemize_ytd: "500.00"   # itemize when aggregate YTD >= this
+  comparison: "gte"                 # gte | gt
+
+ROLLUP:
+  schedule_a_name: "AGGREGATE BELOW THRESHOLD"
+  schedule_b_name: "WITHHELD"
+  # Phase 2 assumed default (A3): IRS-style purpose matching client roll-up name
+  schedule_b_purpose: "WITHHELD"
+
+MONEY:
+  quantize: "0.01"
+  rounding: "ROUND_HALF_UP"
+  # Phase 2 assumed default (A1): preserve cents under xsd:integer
+  federal_xml_amount_encoding: integer_cents  # whole_dollars | integer_cents
+
+UNAPPLIED_CASH:
+  # Phase 2 assumed default (A6)
+  marker_column: "is_unapplied_cash"
+  name_or_purpose_substrings:
+    - "UNAPPLIED CASH"
+    - "UNAPPLIED-CASH"
+  fail_if_unmarked: false
+
+OUTPUT:
+  deleted_records_path: "output/deleted_records.txt"
+  findings_path: "output/findings.json"
+  reconciliation_path: "output/reconciliation_report.txt"
+  federal_xml_path: "output/form_8872.xml"
+
+CREDENTIALS:
+  # Ingest must reject any column whose normalized name matches:
+  forbidden_column_substrings:
+    - "password"
+    - "username"
+    - "secret"
+    - "credential"
+    - "login"

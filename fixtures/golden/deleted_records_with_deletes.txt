@@ -1,0 +1,7 @@
+DELETED | A | 4 | 2026-07-15 | ONE DOLLAR DONOR | 1.00 | exact DELETE_AMOUNTS match
+DELETED | B | 7 | 2026-08-02 | ONE DOLLAR VENDOR | 1.00 | exact DELETE_AMOUNTS match
+DELETED | LEDGER | 12 | 2026-09-01 | LEDGER ONE DOLLAR | 1.00 | exact DELETE_AMOUNTS match
+SUMMARY | count=3 | total_dollars=3.00
+SUMMARY | schedule=A | count=1 | total_dollars=1.00
+SUMMARY | schedule=B | count=1 | total_dollars=1.00
+SUMMARY | schedule=LEDGER | count=1 | total_dollars=1.00

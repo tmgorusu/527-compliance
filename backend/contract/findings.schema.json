@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://527-compliance.local/contract/findings.schema.json",
+  "title": "527 Compliance Findings",
+  "description": "Advisory findings produced by cleaning, compliance, XML validation, and reconciliation. Findings do not themselves file or conclude legal filing obligations.",
+  "type": "object",
+  "$defs": {
+    "Severity": {
+      "type": "string",
+      "enum": ["ERROR", "WARN", "INFO"]
+    },
+    "Finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "rule",
+        "sheet",
+        "row",
+        "field",
+        "message",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable finding id, e.g. DEL-001, THR-A-002, XSD-014"
+        },
+        "severity": { "$ref": "#/$defs/Severity" },
+        "rule": {
+          "type": "string",
+          "description": "Rule key, e.g. delete_amounts, threshold_schedule_a, pl_tieout, xsd_validate"
+        },
+        "sheet": {
+          "type": ["string", "null"],
+          "description": "Source sheet or logical input name, e.g. schedule_a, cover, pl"
+        },
+        "row": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "1-based source row when applicable"
+        },
+        "field": {
+          "type": ["string", "null"],
+          "description": "Field name when applicable"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "description": "Citation or producer, e.g. client_style_guide, IRS Instructions for Form 8872 (Oct 2020) Schedule A, spec/8872Schema.xsd"
+        },
+        "context": {
+          "type": "object",
+          "description": "Optional structured extras (amounts, before/after threshold flags)",
+          "additionalProperties": true
+        }
+      }
+    },
+    "FindingsDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["findings"],
+      "properties": {
+        "findings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Finding" }
+        }
+      }
+    }
+  },
+  "required": ["findings"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Finding" }
+    }
+  }
+}

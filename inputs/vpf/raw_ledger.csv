@@ -1,0 +1,194 @@
+Transaction date,Transaction type,Num,Name,Description,Account Name,Item split account,Amount
+2026-07-14,Expense,,BOK Financial,"ACCOUNT ANALYSIS FEE BOK FINANCIAL    ANALYSIS   121422 1
+WEILAND",Bank Charges & Fees,VPF BOK Escrow Account 7660,56.19
+2026-07-21,Expense,,SunTrust,SERVICE CHARGES - PRIOR PERIOD,Bank Charges & Fees,VPF Truist Operating Account 4511,5.0
+2026-08-14,Expense,,BOK Financial,"ACCOUNT ANALYSIS FEE BOK FINANCIAL    ANALYSIS   121422 1
+WEILAND",Bank Charges & Fees,VPF BOK Escrow Account 7660,63.29
+2026-08-21,Expense,,SunTrust,SERVICE CHARGES - PRIOR PERIOD,Bank Charges & Fees,VPF Truist Operating Account 4511,5.0
+2026-09-15,Expense,,BOK Financial,"ACCOUNT ANALYSIS FEE BOK FINANCIAL    ANALYSIS   121422 1
+WEILAND",Bank Charges & Fees,VPF BOK Escrow Account 7660,63.69
+2026-09-21,Expense,,SunTrust,SERVICE CHARGES - PRIOR PERIOD,Bank Charges & Fees,VPF Truist Operating Account 4511,5.0
+2026-07-10,Expense,,Forte Payment Systems,PREAUTHORIZED ACH DEBIT 260710IXXXXXXXXXXXX1000646849 FORTE PAYMENTS   ACH FEES   071026 15917655,Bank Charges & Fees:Credit Card Processing Fees,VPF BOK Escrow Account 7660,65.07
+2026-08-10,Expense,,Forte Payment Systems,PREAUTHORIZED ACH DEBIT 260810IXXXXXXXXXXXX2001513234 FORTE PAYMENTS   ACH FEES   081026 16139886,Bank Charges & Fees:Credit Card Processing Fees,VPF BOK Escrow Account 7660,132.76
+2026-09-03,Expense,,Forte Payment Systems,PREAUTHORIZED ACH DEBIT 260903IXXXXXXXXXXXX6001314911 FORTE            275375     090326 CC-0902-58C56,Bank Charges & Fees:Credit Card Processing Fees,VPF BOK Escrow Account 7660,53.0
+2026-09-10,Expense,,Forte Payment Systems,PREAUTHORIZED ACH DEBIT 260910IXXXXXXXXXXXX3004061498 FORTE PAYMENTS   ACH FEES   091026 16274384,Bank Charges & Fees:Credit Card Processing Fees,VPF BOK Escrow Account 7660,88.78
+2026-07-07,Bill,26127,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),7.07
+2026-07-14,Bill,26128,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),5.35
+2026-07-21,Bill,26129,MPI,"FundraiQing Portion of Caging, EQcrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),17.95
+2026-07-28,Bill,26130,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),17.82
+2026-08-04,Bill,26130,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),13.91
+2026-08-11,Bill,26132,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),11.15
+2026-08-18,Bill,26133,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),9.5
+2026-08-25,Bill,26134,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),12.58
+2026-09-08,Bill,26135,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),10.36
+2026-09-15,Bill,26137,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),7.05
+2026-09-22,Bill,26139,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),10.01
+2026-09-29,Bill,26140,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Fundraising Caging and Escrow,Accounts Payable (A/P),14.67
+2026-07-07,Bill,26127,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),15.91
+2026-07-14,Bill,26128,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),12.08
+2026-07-21,Bill,26129,MPI,"Political Portion of Caging, EQcrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),40.39
+2026-07-28,Bill,26130,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),40.12
+2026-08-04,Bill,26130,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),31.31
+2026-08-11,Bill,26132,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),25.11
+2026-08-18,Bill,26133,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),21.39
+2026-08-25,Bill,26134,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),28.32
+2026-09-01,Bill,26135,MPI,"Fundraising Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),10.29
+2026-09-01,Bill,26135,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),23.16
+2026-09-08,Bill,26135,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),23.31
+2026-09-15,Bill,26137,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),15.86
+2026-09-22,Bill,26139,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),22.53
+2026-09-29,Bill,26140,MPI,"Political Portion of Caging, Escrow and Fulfillment",Caging and Escrow:Political Caging and Escrow,Accounts Payable (A/P),33.03
+2026-07-07,Bill,26124-A,SecData Solutions,Fundraising Portion of Technology Services,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),186.42
+2026-07-07,Bill,26127,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),42.01
+2026-07-14,Bill,26128-B,CCI Network Services,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),121.78
+2026-07-14,Bill,26128-A,TouchTone Communications,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),75.18
+2026-07-14,Bill,26128,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),31.9
+2026-07-21,Bill,26129,MPI,FundraiQing Portion of Carrier MinuteQ and Dialer ExpenQeQ,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),106.65
+2026-07-28,Bill,26130,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),105.92
+2026-08-04,Bill,26130,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),82.68
+2026-08-11,Bill,26132-B,TouchTone Communications,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),119.69
+2026-08-11,Bill,26132-A,CCI Network Services,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),62.5
+2026-08-11,Bill,26132,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),66.3
+2026-08-18,Bill,26133,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),56.45
+2026-08-25,Bill,26134,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),74.77
+2026-09-01,Bill,26135,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),61.15
+2026-09-08,Bill,26135,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),61.55
+2026-09-11,Bill,26137-A,TouchTone Communications,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),75.86
+2026-09-11,Bill,26137-B,CCI Network Services,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),50.11
+2026-09-15,Bill,26137,MPI,Fundraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),41.88
+2026-09-22,Bill,26139,MPI,FSndraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),59.47
+2026-09-29,Bill,26140,MPI,FSndraising Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Fundraising Carrier Minutes,Accounts Payable (A/P),87.21
+2026-07-07,Bill,26124-A,SecData Solutions,Political Portion of Technology Services,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),413.58
+2026-07-07,Bill,26127,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),93.21
+2026-07-14,Bill,26128-B,CCI Network Services,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),274.11
+2026-07-14,Bill,26128-A,TouchTone Communications,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),169.22
+2026-07-14,Bill,26128,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),70.77
+2026-07-21,Bill,26129,MPI,Political Portion of Carrier MinuteQ and Dialer ExpenQeQ,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),236.61
+2026-07-28,Bill,26130,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),234.99
+2026-08-04,Bill,26130,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),183.42
+2026-08-11,Bill,26132-B,TouchTone Communications,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),269.41
+2026-08-11,Bill,26132-A,CCI Network Services,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),140.69
+2026-08-11,Bill,26132,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),147.1
+2026-08-18,Bill,26133,MPI,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),125.24
+2026-08-25,Bill,26134,MPI,Political Portion of Carrier Minutes and Dialer EVpenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),165.88
+2026-09-01,Bill,26135,MPI,Political Portion of Carrier Minutes and Dialer EVpenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),135.66
+2026-09-08,Bill,26135,MPI,Political Portion of Carrier Minutes and Dialer EVpenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),136.55
+2026-09-11,Bill,26137-A,TouchTone Communications,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),170.76
+2026-09-11,Bill,26137-B,CCI Network Services,Political Portion of Carrier Minutes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),112.79
+2026-09-15,Bill,26137,MPI,Political Portion of Carrier Minutes and Dialer EVpenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),92.91
+2026-09-22,Bill,26139,MPI,Political Portion of Carrier MinStes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),131.93
+2026-09-29,Bill,26140,MPI,Political Portion of Carrier MinStes and Dialer Expenses,Carrier Minutes and Dialer Expense:Political Carrier Minutes,Accounts Payable (A/P),193.49
+2026-09-16,Expense,,Don Pyler CPA,Donald Plyler PAYMENT ID BBT422976631 ZELLE BUSINESS PAYMENT TO,Contract Services:Bookkeeping and Accounting Services,VPF Truist Operating Account 4511,50.0
+2026-07-15,Expense,,GoDaddy,"WEB ORDER GO DADDY.COM,INC Strope ACH CORP DEBIT",Dues & Subscriptions:Domains and Hosting,VPF Truist Operating Account 4511,84.54
+2026-08-10,Expense,,GoDaddy,"WEB ORDER GO DADDY.COM,INC Strope ACH CORP DEBIT",Dues & Subscriptions:Domains and Hosting,VPF Truist Operating Account 4511,54.36
+2026-07-27,Expense,,Intuit,QBooks Onl INTUIT * CHRISTOPHERSTROPE ACH CORP DEBIT,Office Supplies & Software:Software Subscriptions,VPF Truist Operating Account 4511,115.0
+2026-08-27,Expense,,Intuit,QBooks Onl INTUIT * CHRISTOPHERSTROPE ACH CORP DEBIT,Office Supplies & Software:Software Subscriptions,VPF Truist Operating Account 4511,115.0
+2026-09-28,Expense,,Intuit,QBooks Onl INTUIT * CHRISTOPHERSTROPE ACH CORP DEBIT,Office Supplies & Software:Software Subscriptions,VPF Truist Operating Account 4511,115.0
+2026-07-07,Bill,26127,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),14.55
+2026-07-14,Bill,26128,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),11.05
+2026-07-21,Bill,26129,MPI,FundraiQing Portion of PoQtage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),36.93
+2026-07-28,Bill,26130,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),36.68
+2026-08-04,Bill,26130,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),28.63
+2026-08-11,Bill,26132,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),22.96
+2026-08-18,Bill,26133,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),19.55
+2026-08-25,Bill,26134,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),25.89
+2026-09-01,Bill,26135,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),21.18
+2026-09-08,Bill,26135,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),21.31
+2026-09-15,Bill,26137,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),14.5
+2026-09-22,Bill,26139,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),20.59
+2026-09-29,Bill,26140,MPI,Fundraising Portion of Postage and Freight,Postage and Freight:Fundraising Postage and Freight,Accounts Payable (A/P),30.2
+2026-07-07,Bill,26127,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),32.75
+2026-07-14,Bill,26128,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),24.87
+2026-07-21,Bill,26129,MPI,Political Portion of PoQtage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),83.14
+2026-07-28,Bill,26130,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),82.57
+2026-08-04,Bill,26130,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),64.45
+2026-08-11,Bill,26132,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),51.69
+2026-08-18,Bill,26133,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),44.01
+2026-08-25,Bill,26134,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),58.28
+2026-09-01,Bill,26135,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),47.67
+2026-09-08,Bill,26135,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),47.98
+2026-09-15,Bill,26137,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),32.65
+2026-09-22,Bill,26139,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),46.36
+2026-09-29,Bill,26140,MPI,Political Portion of Postage and Freight,Postage and Freight:Political Postage and Freight,Accounts Payable (A/P),67.99
+2026-07-07,Bill,26127,MPI,Fundraising Portion of Technology Services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),38.51
+2026-07-07,Bill,26127,MPI,Fundraising Portion of Development and Other Service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),30.16
+2026-07-14,Bill,26128,MPI,Fundraising Portion of Technology Services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),29.24
+2026-07-14,Bill,26128,MPI,Political Portion of Technology Services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),65.82
+2026-07-14,Bill,26128,MPI,Fundraising Portion of Development and Other Service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),22.9
+2026-07-21,Bill,26129,MPI,FundraiQing Portion of Technology QerviceQ,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),97.76
+2026-07-21,Bill,26129,MPI,FundraiQing Portion of Development and Other Qervice CoQtQ,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),76.58
+2026-07-28,Bill,26130,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),97.09
+2026-07-28,Bill,26130,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),76.06
+2026-08-04,Bill,26130,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),75.79
+2026-08-04,Bill,26130,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),59.37
+2026-08-07,Bill,26132-A,SecData Solutions,Fundraising Portion of Technology Services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),186.42
+2026-08-11,Bill,26132,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),60.78
+2026-08-11,Bill,26132,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),47.61
+2026-08-18,Bill,26133,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),51.75
+2026-08-18,Bill,26133,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),40.54
+2026-08-25,Bill,26134,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),68.54
+2026-08-25,Bill,26134,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),53.69
+2026-09-01,Bill,26135,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),56.05
+2026-09-01,Bill,26135,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),43.91
+2026-09-04,Bill,26136-A,SecData Solutions,Fundraising Portion of Technology Services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),184.56
+2026-09-08,Bill,26135,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),56.42
+2026-09-08,Bill,26135,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),44.19
+2026-09-15,Bill,26137,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),38.39
+2026-09-15,Bill,26137,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),30.07
+2026-09-22,Bill,26139,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),54.51
+2026-09-22,Bill,26139,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),42.7
+2026-09-29,Bill,26140,MPI,Fundraising Portion of Technology services,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),79.95
+2026-09-29,Bill,26140,MPI,Fundraising Portion of Development and Other service Costs,Technology Services:Fundraising Technology Services,Accounts Payable (A/P),62.63
+2026-07-07,Bill,26127,MPI,Political Portion of Technology Services,Technology Services:Political Technology Services,Accounts Payable (A/P),86.69
+2026-07-07,Bill,26127,MPI,Political Portion of Development and Other Service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),67.91
+2026-07-14,Bill,26128,MPI,Political Portion of Development and Other Service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),51.56
+2026-07-21,Bill,26129,MPI,Political Portion of Technology QerviceQ,Technology Services:Political Technology Services,Accounts Payable (A/P),220.06
+2026-07-21,Bill,26129,MPI,Political Portion of Development and Other Qervice CoQtQ,Technology Services:Political Technology Services,Accounts Payable (A/P),172.39
+2026-07-28,Bill,26130,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),218.55
+2026-07-28,Bill,26130,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),171.2
+2026-08-04,Bill,26130,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),170.59
+2026-08-04,Bill,26130,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),133.64
+2026-08-07,Bill,26132-A,SecData Solutions,Political Portion of Technology Services,Technology Services:Political Technology Services,Accounts Payable (A/P),413.58
+2026-08-11,Bill,26132,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),136.81
+2026-08-11,Bill,26132,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),107.17
+2026-08-18,Bill,26133,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),116.48
+2026-08-18,Bill,26133,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),91.25
+2026-08-25,Bill,26134,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),154.27
+2026-08-25,Bill,26134,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),120.85
+2026-09-01,Bill,26135,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),126.17
+2026-09-01,Bill,26135,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),98.85
+2026-09-04,Bill,26136-A,SecData Solutions,Political Portion of Technology Services,Technology Services:Political Technology Services,Accounts Payable (A/P),415.44
+2026-09-08,Bill,26135,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),126.99
+2026-09-08,Bill,26135,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),99.48
+2026-09-15,Bill,26137,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),86.41
+2026-09-15,Bill,26137,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),67.69
+2026-09-22,Bill,26139,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),122.71
+2026-09-22,Bill,26139,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),96.12
+2026-09-29,Bill,26140,MPI,Political Portion of Technology services,Technology Services:Political Technology Services,Accounts Payable (A/P),179.96
+2026-09-29,Bill,26140,MPI,Political Portion of Development and Other service Costs,Technology Services:Political Technology Services,Accounts Payable (A/P),140.97
+2026-07-07,Bill,26127,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),165.7
+2026-07-14,Bill,26128,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),125.8
+2026-07-21,Bill,26129,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),420.62
+2026-07-28,Bill,26130,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),417.74
+2026-08-04,Bill,26130,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),326.07
+2026-08-11,Bill,26132,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),261.5
+2026-08-18,Bill,26133,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),222.65
+2026-08-25,Bill,26134,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),294.88
+2026-09-01,Bill,26135,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),241.17
+2026-09-08,Bill,26135,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),242.74
+2026-09-15,Bill,26137,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),165.16
+2026-09-22,Bill,26139,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),234.54
+2026-09-29,Bill,26140,MPI,Political Portion of Telemarketing,Tele-Fundraising:Political Telemarketing,Accounts Payable (A/P),343.97
+2026-07-07,Bill,26127,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),73.61
+2026-07-14,Bill,26128,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),55.89
+2026-07-21,Bill,26129,MPI,FundraiQing Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),186.86
+2026-07-28,Bill,26130,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),185.58
+2026-08-04,Bill,26130,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),144.86
+2026-08-11,Bill,26132,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),116.17
+2026-08-18,Bill,26133,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),98.91
+2026-08-25,Bill,26134,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),131.0
+2026-09-01,Bill,26135,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),107.14
+2026-09-08,Bill,26135,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),107.84
+2026-09-15,Bill,26137,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),73.37
+2026-09-22,Bill,26139,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),104.2
+2026-09-29,Bill,26140,MPI,Fundraising Portion of Telemarketing,Tele-Fundraising:Telemarketing,Accounts Payable (A/P),152.81

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://forms.irs.gov/pofd/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://forms.irs.gov/pofd/schema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS 8872 Schema - Schema used to upload and validate 8872 forms using the Political Organization Filing</Description>
+			<xsd:Version>Version 2.3</xsd:Version>
+			<ReleaseDate>October 7, 2005</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="8871and8872Common.xsd"/>
+	<xsd:element name="FORM8872">
+		<xsd:annotation>
+			<xsd:documentation>
+				<xsd:description>Root element for the 8872 Form</xsd:description>
+				<xsd:LineNumber>Root Element</xsd:LineNumber>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MailingAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>Organization's Mailing Address</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="FilingType">
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:description>Type of report:  Initial, Amended, Final or Change Of Address</xsd:description>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:element name="InitialReport" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:int">
+										<xsd:totalDigits value="1"/>
+										<xsd:minInclusive value="0"/>
+										<xsd:maxInclusive value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ChangeOfAddress" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:int">
+										<xsd:totalDigits value="1"/>
+										<xsd:minInclusive value="0"/>
+										<xsd:maxInclusive value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AmendedReport" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:int">
+										<xsd:totalDigits value="1"/>
+										<xsd:minInclusive value="0"/>
+										<xsd:maxInclusive value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FinalReport" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:int">
+										<xsd:totalDigits value="1"/>
+										<xsd:minInclusive value="0"/>
+										<xsd:maxInclusive value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DateEstablished" type="DateType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>Date the Organization was Established</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="eMail">
+					<xsd:simpleType>
+						<xsd:restriction base="EmailAddressType">
+							<xsd:minLength value="7"/>
+							<xsd:maxLength value="150"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CustodianName">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>CustodianName</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:minLength value="1"/>
+							<xsd:maxLength value="50"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CustodianAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The Custodian Address</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="ContactPerson">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The Name of the Contact Person</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:minLength value="1"/>
+							<xsd:maxLength value="50"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ContactAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The Contact Person's Address</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="BusinessAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The Business Address of the Organization</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="PeriodBeginDate" type="DateType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The date for the Beginning Period</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="PeriodEndDate" type="DateType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:description>The date for the Ending Period</xsd:description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="ReportType">
+					<xsd:complexType>
+						<xsd:annotation>
+							<xsd:documentation>
+								<xsd:description>The Type of Report</xsd:description>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:choice>
+							<xsd:element name="PreElectionReport" minOccurs="0">
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="ElectionType">
+											<xsd:simpleType>
+												<xsd:restriction base="ElectionType"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ElectionDate" type="DateType"/>
+										<xsd:element name="State" type="StateType"/>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PostGeneralElectionReport" minOccurs="0">
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="ElectionDate" type="DateType"/>
+										<xsd:element name="State" type="StateType"/>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="FirstQuarterlyReport" type="CheckboxTypeString" minOccurs="0"/>
+							<xsd:element name="SecondQuarterlyReport" type="CheckboxTypeString" minOccurs="0"/>
+							<xsd:element name="ThirdQuarterlyReport" type="CheckboxTypeString" minOccurs="0"/>
+							<xsd:element name="YearEndReport" type="CheckboxTypeString" minOccurs="0"/>
+							<xsd:element name="MonthlyReport" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:length value="2"/>
+										<xsd:enumeration value="01"/>
+										<xsd:enumeration value="02"/>
+										<xsd:enumeration value="03"/>
+										<xsd:enumeration value="04"/>
+										<xsd:enumeration value="05"/>
+										<xsd:enumeration value="06"/>
+										<xsd:enumeration value="07"/>
+										<xsd:enumeration value="08"/>
+										<xsd:enumeration value="09"/>
+										<xsd:enumeration value="10"/>
+										<xsd:enumeration value="11"/>
+										<xsd:enumeration value="12"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="MidYearReport" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="CheckboxTypeString">
+										<xsd:length value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:choice>
+					<xsd:element name="NoScheduleA">
+						<xsd:annotation>
+							<xsd:documentation>
+								<xsd:description>Check box if there are no Schedule As.</xsd:description>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="CheckboxTypeYes"/>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="SCHEDULEA" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>
+								<xsd:description>Schedule A Element's</xsd:description>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="ContributorName">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="50"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ContributorAddress" type="USAddressType"/>
+								<xsd:element name="ContributorEmployer">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="70"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ContributorOccupation">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="70"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ContributionDate" type="DateType"/>
+								<xsd:element name="ContributionAmount">
+									<xsd:simpleType>
+										<xsd:restriction base="USAmountType">
+											<xsd:totalDigits value="13"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="AggregateContributionsYTD">
+									<xsd:simpleType>
+										<xsd:restriction base="USAmountType">
+											<xsd:totalDigits value="17"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:choice>
+					<xsd:element name="NoScheduleB">
+						<xsd:annotation>
+							<xsd:documentation>
+								<xsd:description>Check box if there are no Schedule Bs.</xsd:description>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="CheckboxTypeYes"/>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="SCHEDULEB" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>
+								<xsd:description>Schedule B Element's</xsd:description>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="RecipientName">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="50"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="RecipientAddress" type="USAddressType"/>
+								<xsd:element name="RecipientEmployer">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="70"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="RecipientOccupation">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="70"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ExpenditureDate" type="DateType"/>
+								<xsd:element name="ExpenditureAmount">
+									<xsd:simpleType>
+										<xsd:restriction base="USAmountType">
+											<xsd:totalDigits value="13"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+								<xsd:element name="ExpenditurePurpose">
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:minLength value="1"/>
+											<xsd:maxLength value="512"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attributeGroup ref="pacInfo"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

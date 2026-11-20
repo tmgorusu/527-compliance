@@ -1,0 +1,34 @@
+# Runtime / local
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.vercel/
+
+# Outputs (regenerated)
+output/*
+!output/.gitkeep
+
+# Client workbooks may contain portal credentials — never commit
+*.xlsx
+*.xlsm
+*.xls
+
+# Secrets — never commit
+**/credentials*
+**/*password*
+**/*secret*
+inputs/filing_access*
+*.env
+.env.*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+.vercel

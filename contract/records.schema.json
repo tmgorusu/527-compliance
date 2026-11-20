@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://527-compliance.local/contract/records.schema.json",
+  "title": "527 Compliance Normalized Records",
+  "description": "Jurisdiction-independent normalized record types exchanged between pipeline stages. Amounts are decimal dollars with exactly 2 fractional digits as strings. Dates are ISO-8601 calendar dates (YYYY-MM-DD).",
+  "type": "object",
+  "$defs": {
+    "Money": {
+      "type": "string",
+      "pattern": "^-?[0-9]+\\.[0-9]{2}$",
+      "description": "Decimal dollars quantized to 2 places, e.g. \"250.00\". Sign allowed for ledger quirks; schedules should be non-negative after clean."
+    },
+    "IsoDate": {
+      "type": "string",
+      "format": "date",
+      "description": "YYYY-MM-DD"
+    },
+    "StateCode": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "Normalized 2-letter USPS / IRS StateType code"
+    },
+    "Zip5": {
+      "type": "string",
+      "pattern": "^[0-9]{5}$"
+    },
+    "Zip4": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}$"
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["address_line1", "city", "state", "zip5"],
+      "properties": {
+        "address_line1": { "type": "string", "minLength": 1, "maxLength": 35 },
+        "address_line2": { "type": ["string", "null"], "maxLength": 35 },
+        "city": { "type": "string", "minLength": 1, "maxLength": 22 },
+        "state": { "$ref": "#/$defs/StateCode" },
+        "zip5": { "$ref": "#/$defs/Zip5" },
+        "zip4": { "$ref": "#/$defs/Zip4" }
+      }
+    },
+    "CoverRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ein",
+        "period_begin",
+        "period_end",
+        "filing_type",
+        "report_type",
+        "date_established",
+        "email",
+        "custodian_name",
+        "contact_name",
+        "mailing",
+        "custodian",
+        "contact",
+        "business"
+      ],
+      "properties": {
+        "ein": {
+          "type": "string",
+          "pattern": "^[0-9]{9}$",
+          "description": "9-digit EIN, no dash. Organization name is metadata only; not emitted in federal XML."
+        },
+        "organization_name": {
+          "type": ["string", "null"],
+          "description": "Optional human label; not an IRS 8872 XML element."
+        },
+        "pac_id": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+$"
+        },
+        "period_begin": { "$ref": "#/$defs/IsoDate" },
+        "period_end": { "$ref": "#/$defs/IsoDate" },
+        "filing_type": {
+          "type": "string",
+          "enum": ["initial", "change_of_address", "amended", "final"]
+        },
+        "report_type": {
+          "type": "string",
+          "enum": [
+            "first_quarterly",
+            "second_quarterly",
+            "third_quarterly",
+            "year_end",
+            "mid_year",
+            "monthly",
+            "pre_election",
+            "post_general_election"
+          ]
+        },
+        "monthly_month": {
+          "type": ["string", "null"],
+          "pattern": "^(0[1-9]|1[0-2])$",
+          "description": "Required when report_type=monthly"
+        },
+        "election_type": {
+          "type": ["string", "null"],
+          "enum": ["primary", "general", "convention", "special", "run-off", null]
+        },
+        "election_date": { "type": ["string", "null"], "format": "date" },
+        "election_state": { "type": ["string", "null"], "pattern": "^[A-Z]{2}$" },
+        "date_established": { "$ref": "#/$defs/IsoDate" },
+        "email": { "type": "string", "minLength": 7, "maxLength": 150 },
+        "custodian_name": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "contact_name": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "mailing": { "$ref": "#/$defs/Address" },
+        "custodian": { "$ref": "#/$defs/Address" },
+        "contact": { "$ref": "#/$defs/Address" },
+        "business": { "$ref": "#/$defs/Address" },
+        "schedule_a_total": { "$ref": "#/$defs/Money" },
+        "schedule_b_total": { "$ref": "#/$defs/Money" },
+        "source_file": { "type": "string" },
+        "source_row": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "ScheduleARecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "address",
+        "employer",
+        "occupation",
+        "date",
+        "amount",
+        "aggregate_ytd",
+        "is_rollup",
+        "source_row"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "address": { "$ref": "#/$defs/Address" },
+        "employer": { "type": "string", "minLength": 1, "maxLength": 70 },
+        "occupation": { "type": "string", "minLength": 1, "maxLength": 70 },
+        "date": { "$ref": "#/$defs/IsoDate" },
+        "amount": { "$ref": "#/$defs/Money" },
+        "aggregate_ytd": { "$ref": "#/$defs/Money" },
+        "is_rollup": {
+          "type": "boolean",
+          "description": "True for AGGREGATE BELOW THRESHOLD (or WITHHELD non-disclosure) synthetic lines"
+        },
+        "rollup_kind": {
+          "type": ["string", "null"],
+          "enum": ["aggregate_below_threshold", "withheld", null]
+        },
+        "threshold_status_changed_by_deletion": { "type": "boolean", "default": false },
+        "source_file": { "type": "string" },
+        "source_row": { "type": "integer", "minimum": 1 },
+        "raw_name": { "type": ["string", "null"] }
+      }
+    },
+    "ScheduleBRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "address",
+        "employer",
+        "occupation",
+        "date",
+        "amount",
+        "purpose",
+        "is_rollup",
+        "source_row"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "address": { "$ref": "#/$defs/Address" },
+        "employer": { "type": "string", "minLength": 1, "maxLength": 70 },
+        "occupation": { "type": "string", "minLength": 1, "maxLength": 70 },
+        "date": { "$ref": "#/$defs/IsoDate" },
+        "amount": { "$ref": "#/$defs/Money" },
+        "purpose": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "is_rollup": { "type": "boolean" },
+        "rollup_kind": {
+          "type": ["string", "null"],
+          "enum": ["withheld", "aggregate_below_threshold", "unapplied_cash_fold", null]
+        },
+        "is_unapplied_cash": { "type": "boolean", "default": false },
+        "threshold_status_changed_by_deletion": { "type": "boolean", "default": false },
+        "source_file": { "type": "string" },
+        "source_row": { "type": "integer", "minimum": 1 },
+        "raw_name": { "type": ["string", "null"] }
+      }
+    },
+    "DeletedRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schedule",
+        "source_row",
+        "date",
+        "name",
+        "amount",
+        "reason"
+      ],
+      "properties": {
+        "schedule": {
+          "type": "string",
+          "enum": ["A", "B", "LEDGER", "OTHER"]
+        },
+        "source_file": { "type": ["string", "null"] },
+        "source_row": { "type": "integer", "minimum": 1 },
+        "date": { "type": ["string", "null"], "format": "date" },
+        "name": { "type": ["string", "null"] },
+        "amount": { "$ref": "#/$defs/Money" },
+        "reason": {
+          "type": "string",
+          "description": "e.g. exact match DELETE_AMOUNTS=1.00"
+        },
+        "matched_delete_amount": { "$ref": "#/$defs/Money" }
+      }
+    },
+    "RollupRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schedule",
+        "kind",
+        "name",
+        "amount",
+        "component_count",
+        "component_source_rows",
+        "address"
+      ],
+      "properties": {
+        "schedule": { "type": "string", "enum": ["A", "B"] },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "aggregate_below_threshold",
+            "withheld",
+            "unapplied_cash_fold"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Display/XML name: AGGREGATE BELOW THRESHOLD or WITHHELD"
+        },
+        "amount": { "$ref": "#/$defs/Money" },
+        "component_count": { "type": "integer", "minimum": 0 },
+        "component_source_rows": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "address": { "$ref": "#/$defs/Address" },
+        "date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Typically period_end for IRS aggregate lines"
+        },
+        "employer": { "type": "string", "default": "N/A" },
+        "occupation": { "type": "string", "default": "N/A" },
+        "purpose": {
+          "type": ["string", "null"],
+          "description": "Required for Schedule B XML; see ambiguity A3"
+        }
+      }
+    },
+    "PLLineRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["line_label", "amount"],
+      "properties": {
+        "line_label": { "type": "string" },
+        "amount": { "$ref": "#/$defs/Money" },
+        "section": { "type": ["string", "null"] },
+        "source_row": { "type": ["integer", "null"] }
+      }
+    },
+    "NormalizedBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cover", "schedule_a", "schedule_b", "deleted", "rollups", "pl_lines"],
+      "properties": {
+        "cover": { "$ref": "#/$defs/CoverRecord" },
+        "schedule_a": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ScheduleARecord" }
+        },
+        "schedule_b": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ScheduleBRecord" }
+        },
+        "deleted": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/DeletedRecord" }
+        },
+        "rollups": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/RollupRecord" }
+        },
+        "pl_lines": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/PLLineRecord" }
+        }
+      }
+    }
+  }
+}

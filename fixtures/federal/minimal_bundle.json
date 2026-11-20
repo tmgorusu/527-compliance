@@ -1,0 +1,183 @@
+{
+  "cover": {
+    "ein": "854145928",
+    "organization_name": "VIRGINIA POLICE FUND",
+    "pac_id": null,
+    "period_begin": "2026-07-01",
+    "period_end": "2026-09-30",
+    "filing_type": "amended",
+    "report_type": "third_quarterly",
+    "monthly_month": null,
+    "election_type": null,
+    "election_date": null,
+    "election_state": null,
+    "date_established": "2021-02-12",
+    "email": "info@virginiapolicefund.org",
+    "custodian_name": "CHRISTOPHER STROPE",
+    "contact_name": "CHRISTOPHER STROPE",
+    "mailing": {
+      "address_line1": "3900 WESTERRE PARKWAY",
+      "address_line2": "STE 300",
+      "city": "RICHMOND",
+      "state": "VA",
+      "zip5": "23233",
+      "zip4": null
+    },
+    "custodian": {
+      "address_line1": "3900 WESTERRE PARKWAY",
+      "address_line2": "STE 300",
+      "city": "RICHMOND",
+      "state": "VA",
+      "zip5": "23233",
+      "zip4": null
+    },
+    "contact": {
+      "address_line1": "3900 WESTERRE PARKWAY",
+      "address_line2": "STE 300",
+      "city": "RICHMOND",
+      "state": "VA",
+      "zip5": "23233",
+      "zip4": null
+    },
+    "business": {
+      "address_line1": "3900 WESTERRE PARKWAY",
+      "address_line2": "STE 300",
+      "city": "RICHMOND",
+      "state": "VA",
+      "zip5": "23233",
+      "zip4": null
+    },
+    "schedule_a_total": "500.00",
+    "schedule_b_total": "600.00",
+    "source_file": "cover.csv",
+    "source_row": 1
+  },
+  "schedule_a": [
+    {
+      "name": "DRAGON CHEF",
+      "address": {
+        "address_line1": "315 SOUTHGATE SHOPPING CTR",
+        "address_line2": null,
+        "city": "CULPEPER",
+        "state": "VA",
+        "zip5": "22701",
+        "zip4": null
+      },
+      "employer": "BEST EFFORTS MADE",
+      "occupation": "BEST EFFORTS MADE",
+      "date": "2026-07-08",
+      "amount": "250.00",
+      "aggregate_ytd": "250.00",
+      "is_rollup": false,
+      "rollup_kind": null,
+      "threshold_status_changed_by_deletion": false,
+      "source_file": "schedule_a.csv",
+      "source_row": 2,
+      "raw_name": "DRAGON CHEF"
+    },
+    {
+      "name": "UNITED PAINTING PLUS",
+      "address": {
+        "address_line1": "542 FIELDSTONE DR",
+        "address_line2": null,
+        "city": "KESWICK",
+        "state": "VA",
+        "zip5": "22947",
+        "zip4": null
+      },
+      "employer": "BEST EFFORTS MADE",
+      "occupation": "BEST EFFORTS MADE",
+      "date": "2026-07-31",
+      "amount": "250.00",
+      "aggregate_ytd": "250.00",
+      "is_rollup": false,
+      "rollup_kind": null,
+      "threshold_status_changed_by_deletion": false,
+      "source_file": "schedule_a.csv",
+      "source_row": 3,
+      "raw_name": "UNITED PAINTING PLUS"
+    }
+  ],
+  "schedule_b": [
+    {
+      "name": "BOK FINANCIAL",
+      "address": {
+        "address_line1": "BANK OF OKLAHOMA TOWER",
+        "address_line2": "PO BOX 2300",
+        "city": "TULSA",
+        "state": "OK",
+        "zip5": "74135",
+        "zip4": null
+      },
+      "employer": "N/A",
+      "occupation": "N/A",
+      "date": "2026-07-14",
+      "amount": "100.00",
+      "purpose": "ADMIN-BANK CHARGES AND FEES",
+      "is_rollup": false,
+      "rollup_kind": null,
+      "is_unapplied_cash": false,
+      "threshold_status_changed_by_deletion": false,
+      "source_file": "schedule_b.csv",
+      "source_row": 2,
+      "raw_name": "BOK FINANCIAL"
+    },
+    {
+      "name": "VENDOR OVER THRESHOLD LLC",
+      "address": {
+        "address_line1": "100 MAIN ST",
+        "address_line2": null,
+        "city": "AUSTIN",
+        "state": "TX",
+        "zip5": "78701",
+        "zip4": null
+      },
+      "employer": "N/A",
+      "occupation": "N/A",
+      "date": "2026-08-01",
+      "amount": "500.00",
+      "purpose": "FUNDRAISING-CARRIER MINUTES",
+      "is_rollup": false,
+      "rollup_kind": null,
+      "is_unapplied_cash": false,
+      "threshold_status_changed_by_deletion": false,
+      "source_file": "schedule_b.csv",
+      "source_row": 3,
+      "raw_name": "VENDOR OVER THRESHOLD LLC"
+    }
+  ],
+  "deleted": [],
+  "rollups": [],
+  "pl_lines": [
+    {
+      "line_label": "Donations",
+      "amount": "500.00",
+      "section": "Revenue",
+      "source_row": 2
+    },
+    {
+      "line_label": "Total for Revenue",
+      "amount": "500.00",
+      "section": "Revenue",
+      "source_row": 3
+    },
+    {
+      "line_label": "Bank Charges",
+      "amount": "100.00",
+      "section": "Expenditures",
+      "source_row": 4
+    },
+    {
+      "line_label": "Fundraising",
+      "amount": "500.00",
+      "section": "Expenditures",
+      "source_row": 5
+    },
+    {
+      "line_label": "Total for Expenditures",
+      "amount": "600.00",
+      "section": "Expenditures",
+      "source_row": 6
+    }
+  ]
+}
