@@ -26,6 +26,7 @@ from contract.models import (
 
 from src.cleaning.fields import (
     all_caps_text,
+    infer_quarterly_report_type,
     normalize_date,
     normalize_state,
     normalize_whitespace,
@@ -162,6 +163,38 @@ def clean_cover(
         ein = re_digits(_get(row, "ein"), 9)
         filing_type = _get(row, "filing_type").strip().lower()
         report_type = _get(row, "report_type").strip().lower()
+        period_begin = normalize_date(_get(row, "period_begin"))
+        period_end = normalize_date(_get(row, "period_end"))
+        # Correct quarterly report_type when Cover Page disagrees with period
+        # (e.g. UPF Cover said Second quarterly for Jul–Sep → Third quarterly).
+        inferred = infer_quarterly_report_type(period_begin, period_end)
+        if (
+            inferred
+            and report_type
+            in {
+                "first_quarterly",
+                "second_quarterly",
+                "third_quarterly",
+                "year_end",
+            }
+            and report_type != inferred
+        ):
+            findings.append(
+                Finding(
+                    id="COV-002",
+                    severity=Severity.WARN,
+                    rule="report_type_period_mismatch",
+                    sheet="cover",
+                    row=_src_row(row),
+                    field="report_type",
+                    message=(
+                        f"Cover report_type {report_type!r} does not match period "
+                        f"{period_begin}–{period_end}; corrected to {inferred!r}."
+                    ),
+                    source="IRS Instructions for Form 8872 (Oct 2020) When To File",
+                )
+            )
+            report_type = inferred
         email = xml_safe(normalize_whitespace(_get(row, "email")))
         # Emails are not ALL CAPS — preserve for delivery validity.
         election_type_raw = _blank_to_none(_get(row, "election_type"))
@@ -170,8 +203,8 @@ def clean_cover(
             ein=ein,
             organization_name=all_caps_text(_get(row, "organization_name")) or None,
             pac_id=_optional_digits(_get(row, "pac_id")),
-            period_begin=normalize_date(_get(row, "period_begin")),
-            period_end=normalize_date(_get(row, "period_end")),
+            period_begin=period_begin,
+            period_end=period_end,
             filing_type=filing_type,  # type: ignore[arg-type]
             report_type=report_type,  # type: ignore[arg-type]
             monthly_month=_blank_to_none(_get(row, "monthly_month")),

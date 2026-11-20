@@ -216,3 +216,35 @@ def suspected_name_truncation(name: str, max_len: int = 50) -> str | None:
 
 VALID_EMPLOYER_PLACEHOLDERS = frozenset({"BEST EFFORTS MADE", "N/A"})
 VALID_OCCUPATION_PLACEHOLDERS = frozenset({"BEST EFFORTS MADE", "N/A"})
+
+# Calendar-quarter → Form 8872 report_type when period aligns to a full quarter.
+_QUARTER_REPORT_TYPES = {
+    (1, 3): "first_quarterly",
+    (4, 6): "second_quarterly",
+    (7, 9): "third_quarterly",
+    (10, 12): "year_end",  # Oct–Dec year-end quarterly filing
+}
+
+
+def infer_quarterly_report_type(period_begin: str, period_end: str) -> str | None:
+    """Infer quarterly report_type from period months when dates span one quarter.
+
+    Returns None when the period is not a clean calendar quarter (or parse fails).
+    """
+    from calendar import monthrange
+
+    try:
+        begin = date.fromisoformat(period_begin)
+        end = date.fromisoformat(period_end)
+    except ValueError:
+        return None
+    if begin.year != end.year:
+        return None
+    inferred = _QUARTER_REPORT_TYPES.get((begin.month, end.month))
+    if not inferred:
+        return None
+    if begin.day != 1:
+        return None
+    if end.day != monthrange(end.year, end.month)[1]:
+        return None
+    return inferred
